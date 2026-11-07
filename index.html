@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Visita Cid" />
+  <link rel="manifest" href="./manifest.json" />
+  <title>Nuvant · Guía Visita Antonio Cid (15:00h)</title>
+  <style>
+    :root {
+      --bg: #f4f5f7;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #ea580c;
+      --accent-soft: #fff7ed;
+      --success: #16a34a;
+      --success-soft: #f0fdf4;
+      --blue: #2563eb;
+      --blue-soft: #eff6ff;
+      --dark: #0f172a;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; scroll-padding-top: 140px; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding-bottom: 120px;
+      line-height: 1.4;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      color: #fff;
+      padding: 12px 16px 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 14.5px;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .brand span {
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .save-pill {
+      font-size: 11px;
+      color: #86efac;
+      background: rgba(22, 163, 74, 0.22);
+      padding: 3px 8px;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+    .progress-bar-bg {
+      flex: 1;
+      height: 7px;
+      background: #334155;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f97316, #22c55e);
+      transition: width 0.25s ease;
+    }
+    .tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex: 0 0 auto;
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #334155;
+      padding: 7px 11px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .tab-btn:active, .tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+    .sec-header {
+      background: var(--dark);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 800;
+      margin: 22px 0 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      letter-spacing: 0.2px;
+    }
+    .sec-header:first-of-type { margin-top: 4px; }
+    .sec-header span {
+      font-size: 11px;
+      background: var(--accent);
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-weight: 700;
+    }
+    .alert {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      font-size: 13.5px;
+    }
+    .alert strong { color: #9a3412; }
+    .alert-blue {
+      background: var(--blue-soft);
+      border-left: 4px solid var(--blue);
+    }
+    .alert-blue strong { color: #1e40af; }
+    .alert-green {
+      background: var(--success-soft);
+      border-left: 4px solid var(--success);
+    }
+    .alert-green strong { color: #166534; }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin: 0 0 4px 0;
+      color: var(--dark);
+    }
+    .card-sub {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 0 0 12px 0;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 11px 10px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .check-item:has(input:checked), .check-item.checked {
+      background: var(--success-soft);
+      border-color: #86efac;
+    }
+    .check-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin-top: 2px;
+      accent-color: var(--success);
+      flex-shrink: 0;
+    }
+    .check-content { flex: 1; }
+    .check-title {
+      font-weight: 700;
+      font-size: 14.5px;
+      margin-bottom: 3px;
+      color: var(--text);
+    }
+    .check-item:has(input:checked) .check-title, .check-item.checked .check-title {
+      text-decoration: line-through;
+      color: #15803d;
+    }
+    .check-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 5px;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 5px;
+      text-transform: uppercase;
+    }
+    .b-horiz { background: #dbeafe; color: #1e40af; }
+    .b-vert { background: #fce7f3; color: #9d174d; }
+    .b-video { background: #fef3c7; color: #92400e; }
+    .b-lens { background: #f3e8ff; color: #6b21a8; }
+    .b-web { background: #e2e8f0; color: #334155; }
+    .q-block {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .q-block:last-child { border-bottom: none; }
+    .q-label {
+      font-weight: 700;
+      font-size: 14.5px;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .q-hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 6px;
+    }
+    .chip-label {
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+    }
+    .chip-label input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .chip-label span {
+      padding: 9px 13px;
+      border-radius: 8px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #334155;
+      display: inline-block;
+      transition: all 0.12s ease;
+    }
+    .chip-label input:checked + span {
+      background: var(--dark);
+      color: #fff;
+      border-color: var(--dark);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    input[type="text"], input[type="tel"], textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      margin-top: 6px;
+      background: #fff;
+    }
+    input[type="text"]:focus, input[type="tel"]:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: #fffbf7;
+    }
+    textarea { min-height: 72px; resize: vertical; }
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(8px);
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+      border-top: 1px solid #334155;
+    }
+    .btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-green { background: var(--success); color: #fff; }
+    .btn-blue { background: var(--blue); color: #fff; }
+    .btn-outline { background: #1e293b; color: #fff; border: 1px solid #475569; }
+    .toast {
+      position: fixed;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #16a34a;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      display: none;
+      z-index: 999;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+<div id="toast" class="toast">✅ ¡Guardado / Copiado!</div>
+
+<header>
+  <div class="header-top">
+    <div class="brand">NUVANT · ANTONIO CID <span>15:00H</span></div>
+    <div class="save-pill" id="saveIndicator">✓ Autoguardado activo</div>
+  </div>
+  <div class="progress-wrap">
+    <span id="progressText">Cargando...</span>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+  </div>
+  <div class="tabs">
+    <a href="#sec1" class="tab-btn">1. Ruta 15h</a>
+    <a href="#sec2" class="tab-btn">2. Fotos Taller</a>
+    <a href="#sec3" class="tab-btn">3. Su Móvil</a>
+    <a href="#sec4" class="tab-btn">4. Preguntas</a>
+    <a href="#sec5" class="tab-btn">5. Exportar .TXT</a>
+  </div>
+</header>
+
+<main>
+
+  <div class="alert alert-green" id="offlineBanner">
+    <strong>📲 MODO OFFLINE PARA IPHONE:</strong><br/>
+    En Safari pulsa abajo <b>Compartir (⬆️) → «Añadir a pantalla de inicio»</b> (o simplemente no cierres esta pestaña de Safari). Así mañana en la nave <b>funciona 100% SIN INTERNET</b>, autoguarda cada toque y te exporta el archivo <code>.txt</code> a Archivos o Notas.
+  </div>
+
+  <!-- ==================== SECCIÓN 1: RUTA Y ORDEN ==================== -->
+  <div id="sec1" class="sec-header">1. LLEGADA Y ORDEN (15:00 H) <span>PASO 1</span></div>
+
+  <div class="alert">
+    <strong>⚠️ REGLA DE ORO A LAS 15:00 H (POR LA LUZ):</strong><br/>
+    En noviembre a las 17:00h ya oscurece en la nave. <strong>Empieza haciendo TODAS las fotos y vídeos nada más entrar (15:00 a 15:50h)</strong> y deja las preguntas y pasar fotos de su móvil para el final (15:50 a 16:45h), que para hablar no hace falta luz solar.
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">Checklist al bajar del coche (2 min)</h2>
+    <p class="card-sub">Marca estas 3 antes de empezar con las máquinas</p>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="r_lente" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">1. Limpiar las 3 lentes del iPhone con la camiseta</div>
+        <div class="check-desc">Vital para que los LEDs y las luces de la nave no salgan borrosos ni con halos.</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="r_audio" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">2. Poner a grabar Notas de Voz (con su permiso)</div>
+        <div class="check-desc">«Antonio, pongo la grabadora de voz como el otro día y así mientras vemos las máquinas no pierdo detalle».</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="r_orden" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">3. Marcarle el orden para aprovechar el sol</div>
+        <div class="check-desc">«Antonio, aprovechando que ahora a las 3 hay buena luz, primero te echo las fotos y vídeos a las máquinas y piezas, y luego nos sentamos 15 minutos a confirmar los datos de la web y pasar las fotos de tu móvil».</div>
+      </div>
+    </label>
+  </div>
+
+  <!-- ==================== SECCIÓN 2: FOTOS Y VÍDEOS EN LA NAVE ==================== -->
+  <div id="sec2" class="sec-header">2. FOTOS Y VÍDEOS EN LA NAVE <span>CON LUZ</span></div>
+
+  <div class="alert alert-blue">
+    <strong>📐 Cómo sujetar el móvil para que la web quede brutal:</strong><br/>
+    • <b>Para la web casi todo va en HORIZONTAL (apaisado)</b> usando <b>1x</b> (general) o <b>2x</b> (detalles de cerca).<br/>
+    • <b>En los vídeos de máquinas funcionando:</b> graba 10 seg en <b>HORIZONTAL</b> (para la web) y 10 seg en <b>VERTICAL</b> (para Google Maps / futuros Reels).<br/>
+    • Si hay cubos, escobas o cajas feas delante de una máquina, <b>apártalos 1 metro antes de disparar</b>.
+  </div>
+
+  <!-- GRUPO A -->
+  <div class="card">
+    <h2 class="card-title">A. Portada de la Web y Nave General</h2>
+    <p class="card-sub">Transmite «Fábrica grande y seria en Polígono Polipar»</p>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_hero" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">A1. FOTO PORTADA WEB (La más importante)</div>
+        <div class="check-desc">Ponte a la altura del pecho. Saca la Fresadora 4×2m o el Plasma con la nave de fondo. <b>Deja la máquina hacia la DERECHA del encuadre y aire libre a la IZQUIERDA</b> (ahí irá el texto grande y el botón de WhatsApp). Si sale Antonio o su hijo de espaldas trabajando, un 10.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span><span class="badge b-web">Portada Hero</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_nave1" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">A2. Plano General Interior (Desde la puerta hacia dentro)</div>
+        <div class="check-desc">Que se vean varias máquinas a la vez y la amplitud de la nave. Haz una en 1x y otra en 0.5x.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">1x y 0.5x</span><span class="badge b-web">Portada Google Maps</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_nave2" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">A3. Plano General Interior (Desde el fondo hacia la entrada)</div>
+        <div class="check-desc">Otro ángulo amplio del taller.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_fachada" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">A4. Exterior / Puerta de la nave desde la calle</div>
+        <div class="check-desc">Con el portón abierto donde se vea la entrada del taller (sirve para «Dónde estamos / Recogida en nave» y para que Google Maps tenga fachada).</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span></div>
+      </div>
+    </label>
+  </div>
+
+  <!-- GRUPO B -->
+  <div class="card">
+    <h2 class="card-title">B. Las 4 Máquinas + Placas Técnicas</h2>
+    <p class="card-sub">Para las tarjetas de la sección «Nuestro Parque de Maquinaria»</p>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_fresa_gen" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B1. Fresadora CNC 4×2m — Máquina entera</div>
+        <div class="check-desc">Tírala desde una esquina en diagonal para que se note lo enorme que es la mesa de 4 metros.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_fresa_det" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B2. Fresadora CNC 4×2m — Detalle de la fresa cortando + Vídeo</div>
+        <div class="check-desc">De cerca viendo la fresa cortando composite, aluminio, metacrilato o madera, más vídeo de 10-15s en acción.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 2x</span><span class="badge b-video">Vídeo 10s H y V</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_fresa_placa" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B3. Fresadora CNC — Foto a la placa/etiqueta de marca y modelo</div>
+        <div class="check-desc">Solo para nosotros, para leer especificaciones exactas.</div>
+        <div class="badges"><span class="badge b-web">Referencia interna</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_plasma_gen" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B4. Cortadora de Plasma CNC 3×1,5m — Máquina entera</div>
+        <div class="check-desc">En diagonal viendo toda la cama de rejilla metálica de 3×1,5 metros.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_plasma_chispas" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B5. Plasma CNC — Cortando hierro echando chispas + Vídeo</div>
+        <div class="check-desc">Pídele que corte aunque sea un retal de 10 segundos para sacar fotos y vídeo con chispas naranjas. Es la foto más visual de toda la web.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">1x y 2x</span><span class="badge b-video">Vídeo 10s H y V</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_plasma_placa" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B6. Plasma CNC — Foto a la placa técnica y al compresor de aire</div>
+        <div class="check-desc">Referencia interna de marca/potencia.</div>
+        <div class="badges"><span class="badge b-web">Referencia interna</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_laser_gen" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B7. Soldadora Láser Nueva — Máquina y antorcha</div>
+        <div class="check-desc">Foto limpia de la máquina de soldadura láser (casi ningún taller de Sevilla la tiene).</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_laser_accion" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B8. Soldadora Láser — Manos de Antonio soldando una letra + Vídeo</div>
+        <div class="check-desc">De espaldas o solo manos + antorcha soldando aluminio/inox/hierro sin deformarlo.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 2x</span><span class="badge b-video">Vídeo 10s H y V</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_laser_placa" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B9. Soldadora Láser — Foto a la placa/modelo</div>
+        <div class="check-desc">Para poner la potencia exacta en la web.</div>
+        <div class="badges"><span class="badge b-web">Referencia interna</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_horno" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B10. Horno de moldear plástico + Máquina de mano de doblar</div>
+        <div class="check-desc">Foto del horno nuevo que se ha fabricado y de cómo moldea o pliega el canto de una letra corpórea a mano.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">1x y 2x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_otra_maq" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">B11. Zona de Lacado / Pintura + Otras máquinas que tenga allí</div>
+        <div class="check-desc">Caballetes/pistola/cabina donde laca, sierras de corte, plegadoras, etc.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span></div>
+      </div>
+    </label>
+  </div>
+
+  <!-- GRUPO C -->
+  <div class="card">
+    <h2 class="card-title">C. Detalles Técnicos «De Profesional a Profesional»</h2>
+    <p class="card-sub">Cosas del taller que enamoran a un rotulista, chapista o reformista</p>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_moldes_band" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">C1. Moldes propios de Banderolas (60, 70 y 80 cm, redondas y cuadradas)</div>
+        <div class="check-desc">Foto de los moldes y, si tiene alguna banderola hecha o a medias, foto también. Es su producto estrella de catálogo B2B.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x / 2x</span><span class="badge b-web">Sección Catálogo</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_composite_v" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">C2. Bandeja de Composite / Dibond fresada en V y doblada a 90°</div>
+        <div class="check-desc">1 foto por detrás (donde se ve la ranura en V fresada) y 1 foto por fuera (esquina perfecta a 90° sin juntas vistas) + los carriles de montaje.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 2x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_letra_tacon" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">C3. Letra corpórea «con tacón/serifa» y letra en Acero Inox («S4/C4»)</div>
+        <div class="check-desc">Foto de cerca en modo 2x del encaje perfecto entre frontal y canto plegado a mano, y de la costura finísima de la soldadura láser por dentro.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 2x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_grosor_15mm" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">C4. Chapa/pieza de metal grueso (10 mm o 15 mm) de canto</div>
+        <div class="check-desc">Foto de cerca al canto de un corte de 10mm o 15mm (pon su mano o un metro al lado para que se note el grosor brutal que corta su plasma).</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 2x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_oxido" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">C5. Acabado Oxidado Químico Barnizado (Efecto Corten) + Inox Espejo</div>
+        <div class="check-desc">Si le queda algún trofeo TDA de muestra o chapa oxidada barnizada (que no mancha), foto de cerca en 2x a la textura.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 2x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_leds" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">C6. Electrónica limpia: Módulos LED 12V/24V, Fuentes y Neón Flex</div>
+        <div class="check-desc">Foto de una letra o cajón abierto donde se vea el cableado limpio de LEDs y transformadores.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 2x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_plantilla" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">C7. Plantilla en papel/cartón a tamaño real + Varillas de montaje</div>
+        <div class="check-desc">Para ilustrar «Te entregamos el rótulo con plantilla a escala 1:1 y tornillería listo para presentar en pared y taladrar».</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_pc_cad" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">C8. Pantalla del ordenador del taller con plano vectorial (CAD/Corel)</div>
+        <div class="check-desc">Foto en diagonal al monitor del PC con el despiece de un rótulo o piezas en serie listas para mandar a máquina.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 2x</span></div>
+      </div>
+    </label>
+  </div>
+
+  <!-- GRUPO D -->
+  <div class="card">
+    <h2 class="card-title">D. Stock de Planchas, Embalaje y Trabajos Hoy</h2>
+    <p class="card-sub">Demuestra capacidad industrial y envíos seguros a toda España</p>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_stock" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">D1. Stock de planchas grandes apiladas (4×2m y 3×1,5m)</div>
+        <div class="check-desc">Composite de colores, metacrilato, PVC, aluminio, chapa de hierro/inox en estanterías o palés.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_embalaje" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">D2. Bobina industrial gigante de cartón + Paquetes embalados</div>
+        <div class="check-desc">La bobina de 200€, rollo de burbuja y cualquier pieza envuelta lista para salir por agencia o furgón.</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">Lente 1x</span></div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="f_trabajos_hoy" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">D3. Todos los encargos que tenga HOY encima de las mesas</div>
+        <div class="check-desc">La farmacia actual, piezas de la gasolinera, letras sueltas, cuadros o lo que esté fabricando hoy (foto general 1x + foto detalle 2x).</div>
+        <div class="badges"><span class="badge b-horiz">Horizontal</span><span class="badge b-lens">1x y 2x</span></div>
+      </div>
+    </label>
+
+    <div class="q-block">
+      <label class="q-label">Notas rápidas sobre las fotos que acabas de echar en la nave:</label>
+      <textarea data-id="notas_fotos_nave" placeholder="Apunta aquí qué trabajos había hoy en las mesas o si echaste foto a alguna máquina nueva..."></textarea>
+    </div>
+  </div>
+
+  <!-- ==================== SECCIÓN 3: VACIADO DE SU MÓVIL ANDROID ==================== -->
+  <div id="sec3" class="sec-header">3. SACAR FOTOS DE SU ANDROID <span>5 MIN</span></div>
+
+  <div class="alert">
+    <strong>📲 CÓMO PASARLAS DESDE SU ANDROID SIN PERDER CALIDAD:</strong><br/>
+    1. En el móvil Android de Antonio, abre vuestro chat de WhatsApp.<br/>
+    2. Pulsa el icono del <b>Clip (📎) → «Documento» → «Buscar otros documentos / Galería»</b> (o si las mandáis como Galería, pulsa el botón <b>«HD»</b> arriba antes de enviar).<br/>
+    3. <b>Mientras las buscáis juntos, ten la grabadora de voz puesta</b> y pregúntale de cada una: qué material lleva y cuánto mide.
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">Trabajos Pasados a Sacar de su Móvil</h2>
+    <p class="card-sub">Ve marcando conforme entren en tu WhatsApp</p>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="m_omoda" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">1. Concesionario Omoda y Jaecoo (Huelva)</div>
+        <div class="check-desc">El rótulo de 17 m, la fachada de 25 × 5 m, el monolito y fotos/vídeos del montaje de noche con la grúa.</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="m_urna" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">2. Urna del traje de astronauta (Agencia Espacial Española, 2,5m)</div>
+        <div class="check-desc">Su obra favorita (1×1×2,50 m con iluminación).</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="m_logo_aee" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">3. Escudo/Logo circular de 2,50 m (Agencia Espacial Española)</div>
+        <div class="check-desc">El de la puerta principal en acero inoxidable y chapa de 10 mm.</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="m_trofeos" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">4. Tirada de 500 Trofeos «TDA» en hierro oxidado 10 mm</div>
+        <div class="check-desc">Las fotos de la mesa llena de trofeos oxidados y barnizados sobre peana.</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="m_farmacias" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">5. Fachadas de Farmacias (Pino Montano SE-30, Huelva, ConSalud y la actual)</div>
+        <div class="check-desc">Incluyendo la foto del «antes» y la recreación con IA de la farmacia nueva que te enseñó.</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="m_canarias" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">6. Los 2 grandes cajones/paquetes enviados a Canarias</div>
+        <div class="check-desc">Foto clave para demostrar envíos a toda España e islas («Preparado para enviar a uno de nuestros clientes»).</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="m_gasolinera" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">7. Gasolinera completa / Monolitos</div>
+        <div class="check-desc">Fotos del proyecto de la gasolinera o monolitos anteriores.</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="m_video_prueba" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">8. Vídeos de prueba encendiendo rótulos antes de embalar</div>
+        <div class="check-desc">Esos vídeos que él manda por WhatsApp a sus clientes probando la luz antes de cerrar la caja.</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="m_banderolas" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">9. Fotos de Banderolas (60/70/80 cm), Letras corpóreas y Arcos/Caballo</div>
+        <div class="check-desc">Cualquier otra foto potente que tenga en su galería o en el móvil de su hijo Efi.</div>
+      </div>
+    </label>
+
+    <div class="q-block">
+      <label class="q-label">Apuntes sobre las fotos que te ha pasado (qué es cada una):</label>
+      <textarea data-id="notas_fotos_movil" placeholder="Ej: La foto de las letras azules es aluminio lacado de 12 metros en Dos Hermanas..."></textarea>
+    </div>
+  </div>
+
+  <!-- ==================== SECCIÓN 4: CUESTIONARIO SÍ/NO Y CASILLAS ==================== -->
+  <div id="sec4" class="sec-header">4. CUESTIONARIO SÍ/NO <span>SENTADOS</span></div>
+
+  <div class="alert alert-blue">
+    <strong>💡 Anti-Divagación:</strong><br/>
+    Todo viene pre-marcado con lo que sabemos de las 2 reuniones. Léele rápido y toca los botones para confirmar.
+  </div>
+
+  <!-- BLOQUE 1: DATOS LEGALES Y CONTACTO -->
+  <div class="card">
+    <h2 class="card-title">1. Datos Fiscales, Dominio y Contacto</h2>
+    <p class="card-sub">Para el Aviso Legal obligatorio, tu Factura, el Dominio .es y Google Maps</p>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="q_foto_factura" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">📸 TRUCO: Hacerle foto a una factura o albarán suyo</div>
+        <div class="check-desc">Así tienes su Razón Social exacta, NIF/CIF y dirección exacta sin hacérselo dictar.</div>
+      </div>
+    </label>
+
+    <div class="q-block">
+      <label class="q-label">1.1. Razón Social / Nombre Fiscal y NIF/CIF (si no hay foto de factura):</label>
+      <input type="text" data-id="q_fiscal" placeholder="Ej: Antonio Cid... / CIF o DNI..." />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">1.2. Dirección exacta de la nave en el Polígono Polipar:</label>
+      <input type="text" data-id="q_direccion" placeholder="Calle y Nº de nave exacta (41610 Paradas, Sevilla)" />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">1.3. ¿Qué nombre comercial quiere ver escrito en la cabecera de la Web y en Google Maps?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_nombre_comercial" value="Talleres Antonio Cid" /><span>Talleres Antonio Cid</span></label>
+        <label class="chip-label"><input type="radio" name="q_nombre_comercial" value="Antonio Cid · Corte y Fabricación" /><span>Antonio Cid · Corte y Fabricación</span></label>
+        <label class="chip-label"><input type="radio" name="q_nombre_comercial" value="Antonio Cid Rótulos" checked /><span>Antonio Cid Rótulos</span></label>
+        <label class="chip-label"><input type="radio" name="q_nombre_comercial" value="Antonio Cid" /><span>Antonio Cid</span></label>
+      </div>
+      <input type="text" data-id="q_nombre_comercial_otro" placeholder="O escribir otro nombre comercial exacto..." />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">1.4. ¿Tiene logotipo en archivo o usamos letra industrial limpia?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_logo" value="No tiene / Usar texto industrial limpio" checked /><span>No tiene / Usar texto industrial limpio</span></label>
+        <label class="chip-label"><input type="radio" name="q_logo" value="Sí tiene logo (pedir archivo)" /><span>Sí tiene logo (pedir archivo)</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">1.5. ¿Qué dominio .es prefiere? (Todos comprobados LIBRES hoy):</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_dominio" value="tallercid.es" checked /><span>tallercid.es</span></label>
+        <label class="chip-label"><input type="radio" name="q_dominio" value="talleresantoniocid.es" /><span>talleresantoniocid.es</span></label>
+        <label class="chip-label"><input type="radio" name="q_dominio" value="rotulosantoniocid.es" /><span>rotulosantoniocid.es</span></label>
+        <label class="chip-label"><input type="radio" name="q_dominio" value="cidcorte.es" /><span>cidcorte.es</span></label>
+      </div>
+      <input type="text" data-id="q_dominio_otro" placeholder="Otro dominio si prefiere..." />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">1.6. Teléfono y WhatsApp para presupuestos en la web y Google Maps:</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_tel_tipo" value="Su móvil habitual" checked /><span>Su móvil habitual</span></label>
+        <label class="chip-label"><input type="radio" name="q_tel_tipo" value="Otro número distinto" /><span>Otro número distinto</span></label>
+      </div>
+      <input type="tel" data-id="q_telefono" placeholder="Confirmar número: 6XX XXX XXX" />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">1.7. Horario público para mostrar en Google Maps y en la Web:</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_horario" value="Lunes a Viernes 8:00 a 15:00" checked /><span>Lunes a Viernes 8:00 a 15:00</span></label>
+        <label class="chip-label"><input type="radio" name="q_horario" value="Lunes a Viernes 8:00 a 14:00" /><span>Lunes a Viernes 8:00 a 14:00</span></label>
+        <label class="chip-label"><input type="radio" name="q_horario" value="Horario partido (mañana y tarde)" /><span>Horario partido (mañana y tarde)</span></label>
+      </div>
+      <input type="text" data-id="q_horario_nota" placeholder="Especificar si abre alguna tarde..." />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">1.8. ¿Mostramos la ubicación exacta de la nave en Google Maps para que vengan profesionales a traer/recoger material (poniendo «Cita previa por WhatsApp»)?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_mostrar_dir" value="SÍ, dirección visible en Polipar" checked /><span>SÍ, dirección visible en Polipar</span></label>
+        <label class="chip-label"><input type="radio" name="q_mostrar_dir" value="NO, ocultar nave (solo zona de servicio)" /><span>NO, ocultar nave (solo zona de servicio)</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOQUE 2: CATÁLOGO DE SERVICIOS (TACHAR / AÑADIR) -->
+  <div class="card" id="serviciosBlock">
+    <h2 class="card-title">2. Lista de Trabajos y Servicios B2B</h2>
+    <p class="card-sub">Ya están marcados los que sabemos. Desmarca si alguno NO lo quiere en la web o apunta nuevos en «Otros»</p>
+
+    <div class="q-label" style="color: var(--accent);">A. Para Rotulistas, Imprentas y Agencias:</div>
+    <label class="check-item"><input type="checkbox" data-id="s_corp_sin" checked /><div class="check-content"><div class="check-title">Letras corpóreas SIN luz (inox, aluminio, hierro, corten, latón, PVC, metacrilato, madera, corcho)</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_corp_con" checked /><div class="check-content"><div class="check-title">Letras corpóreas CON iluminación LED (frontal opal o retroiluminadas con separadores)</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_corp_tacon" checked /><div class="check-content"><div class="check-title">Letras complejas con tacón/serifa y letras gigantes transitables</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_cajones" checked /><div class="check-content"><div class="check-title">Cajones y bandejas de Composite/Dibond fresados en V y plegados a 90° sin juntas</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_banderolas" checked /><div class="check-content"><div class="check-title">Banderolas con molde propio (60, 70 y 80 cm, redondas y cuadradas) y a medida</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_monolitos" checked /><div class="check-content"><div class="check-title">Monolitos, tótems y postes publicitarios de gran formato (gasolineras, concesionarios, naves)</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_neon" checked /><div class="check-content"><div class="check-title">Rótulos en Neón LED (Neón Flex interior y exterior) sobre metacrilato o composite</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_cruces" /><div class="check-content"><div class="check-title">¿Cruces de farmacia o pantallas LED programables? (Preguntar si las suministra)</div></div></label>
+    <input type="text" data-id="s_otros_rotulistas" placeholder="+ Otros trabajos para rotulistas que te diga..." />
+
+    <div class="q-label" style="color: var(--accent); margin-top: 14px;">B. Para Reformistas, Constructoras e Interioristas:</div>
+    <label class="check-item"><input type="checkbox" data-id="s_fachadas" checked /><div class="check-content"><div class="check-title">Revestimiento integral de fachadas en Composite/Dibond con sistema de bandejas y carriles ocultos</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_celosias" checked /><div class="check-content"><div class="check-title">Celosías decorativas, paneles separadores y murales calados (hasta 3–4 m) en metal o madera</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_estructuras" checked /><div class="check-content"><div class="check-title">Estructuras metálicas a medida, arcos decorativos y revestimientos interiores</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_cancelas" /><div class="check-content"><div class="check-title">¿Chapas perforadas/caladas para puertas, cancelas, vallas o barandillas de obra?</div></div></label>
+    <input type="text" data-id="s_otros_reformas" placeholder="+ Otros trabajos para reformas / interiorismo..." />
+
+    <div class="q-label" style="color: var(--accent); margin-top: 14px;">C. Para Chapistas, Herreros y Talleres Metálicos:</div>
+    <label class="check-item"><input type="checkbox" data-id="s_plasma" checked /><div class="check-content"><div class="check-title">Corte por plasma CNC de chapa hasta 15 mm (hierro, corten, inox, aluminio; piezas sueltas o series)</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_soldadura_terceros" checked /><div class="check-content"><div class="check-title">Servicio de soldadura láser de precisión sin deformación (aluminio, inox, hierro, latón)</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_oxidado" checked /><div class="check-content"><div class="check-title">Oxidado químico controlado (efecto Acero Corten) + Barnizado protector que no mancha</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_lacado" checked /><div class="check-content"><div class="check-title">Lacado industrial (mate, satinado, brillo y lacado al horno de alta resistencia)</div></div></label>
+    <input type="text" data-id="s_otros_metal" placeholder="+ Otros servicios para chapistas / herreros..." />
+
+    <div class="q-label" style="color: var(--accent); margin-top: 14px;">D. Para Carpinteros, Eventos, Clubes e Instituciones:</div>
+    <label class="check-item"><input type="checkbox" data-id="s_carpinteros" checked /><div class="check-content"><div class="check-title">Fresado y corte CNC en serie de madera maciza y DM para carpinteros (traen el palé y se lo llevan cortado)</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_urnas" checked /><div class="check-content"><div class="check-title">Urnas expositoras, vitrinas y tótems en metacrilato y metal a medida (tipo Agencia Espacial)</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_trofeos" checked /><div class="check-content"><div class="check-title">Tiradas de trofeos, premios y placas corporativas en serie (mínimo tandas de 10 uds)</div></div></label>
+    <label class="check-item"><input type="checkbox" data-id="s_termoformado" checked /><div class="check-content"><div class="check-title">Termoformado y moldeado de plásticos / metacrilato con horno propio</div></div></label>
+    <input type="text" data-id="s_otros_eventos" placeholder="+ Otros trabajos para carpinteros / eventos..." />
+  </div>
+
+  <!-- BLOQUE 3: MAQUINARIA Y DETALLES TÉCNICOS -->
+  <div class="card">
+    <h2 class="card-title">3. Maquinaria y Límites Técnicos</h2>
+    <p class="card-sub">Confirmar datos finos para las fichas técnicas de la web</p>
+
+    <div class="q-block">
+      <label class="q-label">3.1. Fresadora CNC (4.000 × 2.000 mm): ¿Hasta qué grosor máximo de placa/tablero corta bien?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_fresa_grosor" value="Hasta 20 mm" /><span>Hasta 20 mm</span></label>
+        <label class="chip-label"><input type="radio" name="q_fresa_grosor" value="Hasta 30 mm" checked /><span>Hasta 30 mm</span></label>
+        <label class="chip-label"><input type="radio" name="q_fresa_grosor" value="Hasta 50 mm (en PVC/corcho)" /><span>Hasta 50 mm (en PVC/corcho)</span></label>
+      </div>
+      <input type="text" data-id="q_fresa_nota" placeholder="Apunte extra sobre la fresadora (marca, materiales, etc.)..." />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">3.2. Plasma CNC (3.000 × 1.500 mm, máx. 15 mm): ¿Desde qué grosor mínimo de chapa empieza a cortar limpio?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_plasma_min" value="Desde 1 mm" /><span>Desde 1 mm</span></label>
+        <label class="chip-label"><input type="radio" name="q_plasma_min" value="Desde 1,5 – 2 mm hasta 15 mm" checked /><span>Desde 1,5 – 2 mm hasta 15 mm</span></label>
+        <label class="chip-label"><input type="radio" name="q_plasma_min" value="Desde 3 mm hasta 15 mm" /><span>Desde 3 mm hasta 15 mm</span></label>
+      </div>
+      <input type="text" data-id="q_plasma_nota" placeholder="Apunte extra sobre el plasma..." />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">3.3. Soldadora Láser manual: además de aluminio, inox, hierro y latón, ¿suelda cobre o chapa galvanizada?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_laser_metales" value="SÍ, cualquier metal" checked /><span>SÍ, cualquier metal</span></label>
+        <label class="chip-label"><input type="radio" name="q_laser_metales" value="Solo aluminio, inox, hierro y latón" /><span>Solo aluminio, inox, hierro y latón</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">3.4. Horno nuevo de moldeado de plástico + Plegado de letras:</label>
+      <input type="text" data-id="q_horno_medida" placeholder="¿Qué tamaño máximo cabe en el horno? ¿Qué fondo/canto de letra suele plegar (ej. 3 a 20 cm)?" />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">3.5. + OTRA MÁQUINA O HERRAMIENTA ADICIONAL EN LA NAVE:</label>
+      <div class="q-hint">Si tiene plegadora de chapa, sierra mural, cabina de pintura, plotter de vinilo u otra máquina, apúntala aquí:</div>
+      <textarea data-id="q_otra_maquina_detalle" placeholder="Nombre de la máquina, medidas de trabajo y qué hace..."></textarea>
+    </div>
+  </div>
+
+  <!-- BLOQUE 4: BANDEROLAS Y CATÁLOGO ESTÁNDAR -->
+  <div class="card">
+    <h2 class="card-title">4. Banderolas de Molde (60, 70 y 80 cm)</h2>
+    <p class="card-sub">Su producto estandarizado estrella para vender a otros rotulistas</p>
+
+    <div class="q-block">
+      <label class="q-label">4.1. ¿Cómo entrega las banderolas cuadradas y redondas de 60, 70 y 80 cm? (Puedes marcar varias):</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="checkbox" name="q_banderolas_entrega" value="Completas con LED interior y fuente" checked /><span>Completas con LED interior y fuente</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_banderolas_entrega" value="A doble cara o a 1 cara" checked /><span>A doble cara o a 1 cara</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_banderolas_entrega" value="Con soporte/brazo a fachada" checked /><span>Con soporte/brazo a fachada</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_banderolas_entrega" value="En blanco (listas para que el rotulista ponga su vinilo)" checked /><span>En blanco (para que el rotulista vinile)</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_banderolas_entrega" value="También ya rotuladas/caladas si lo piden" /><span>También ya rotuladas si lo piden</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">4.2. ¿Ocultamos el precio en la web («Consultar tarifa profesional por WhatsApp») para que los clientes finales no vean el coste mayorista del rotulista?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_banderolas_precio" value="SÍ, ocultar precios (solo por WhatsApp a profesionales)" checked /><span>SÍ, ocultar precios (solo por WhatsApp)</span></label>
+        <label class="chip-label"><input type="radio" name="q_banderolas_precio" value="Poner precio Desde X €" /><span>Poner precio «Desde X €»</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">4.3. ¿Tiene algún otro producto de medida fija o molde propio?</label>
+      <input type="text" data-id="q_otros_moldes" placeholder="Ej: placas de fachada estándar, letras de boda de 1m, caballetes..." />
+    </div>
+  </div>
+
+  <!-- BLOQUE 5: OPERATIVA, ARCHIVOS, ENVÍOS Y ENFOQUE WEB -->
+  <div class="card">
+    <h2 class="card-title">5. Operativa, Archivos, Envíos y Enfoque</h2>
+    <p class="card-sub">Para la sección «Cómo trabajamos» y «Preguntas Frecuentes»</p>
+
+    <div class="q-block">
+      <label class="q-label">5.1. En la portada de la web, ¿qué le interesa empujar MÁS porque le deje más dinero con menos dolor de cabeza?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="checkbox" name="q_prioridad_web" value="1. Corte puro de máquina (Fresadora 4×2 y Plasma)" checked /><span>1. Corte puro de máquina (Fresadora 4×2 y Plasma)</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_prioridad_web" value="2. Letras corpóreas y bandejas de composite para el gremio" checked /><span>2. Letras corpóreas y bandejas de composite</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_prioridad_web" value="3. Banderolas de molde 60/70/80 cm" checked /><span>3. Banderolas de molde 60/70/80 cm</span></label>
+      </div>
+      <input type="text" data-id="q_trabajos_evitar" placeholder="¿Algún trabajo pequeño o cliente pesado que quiera FILTRAR/EVITAR en la web?..." />
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">5.2. ¿El profesional (carpintero, rotulista, herrero) puede traer su propio palé de material para que Antonio le cobre solo el corte, o también pone Antonio el material de su stock?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_material_cliente" value="Ambas: con material de nuestro stock o trayendo el profesional su material" checked /><span>Ambas: material propio o del cliente</span></label>
+        <label class="chip-label"><input type="radio" name="q_material_cliente" value="Solo con material de nuestro taller" /><span>Solo con material de nuestro taller</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">5.3. ¿Qué formatos de archivo acepta y qué pasa si el profesional solo tiene un boceto/foto?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="checkbox" name="q_archivos" value="DXF / DWG" checked /><span>DXF / DWG</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_archivos" value="AI / CorelDRAW / EPS" checked /><span>AI / CorelDRAW / EPS</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_archivos" value="PDF Vectorial" checked /><span>PDF Vectorial</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_archivos" value="Vectorizamos desde boceto/foto con medidas" checked /><span>Vectorizamos desde boceto/foto</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">5.4. ¿Cómo entrega los rótulos y letras corpóreas para facilitar el montaje al profesional?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="checkbox" name="q_kit_montaje" value="Plantilla de papel/cartón a tamaño real (escala 1:1)" checked /><span>Plantilla papel/cartón escala 1:1</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_kit_montaje" value="Varillas roscadas / separadores fijados" checked /><span>Varillas / separadores fijados</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_kit_montaje" value="Transformadores y LEDs cableados listos para conectar" checked /><span>Fuentes y LEDs listos para conectar</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_kit_montaje" value="Vídeo por WhatsApp del rótulo encendido antes de embalar" checked /><span>Vídeo encendido por WhatsApp antes de enviar</span></label>
+        <label class="chip-label"><input type="checkbox" name="q_kit_montaje" value="Soporte telefónico directo con Antonio si el montador tiene dudas" checked /><span>Soporte directo por teléfono al montar</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">5.5. Plazos de entrega para mostrar en la web:</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_plazos_web" value="Poner Corte CNC rápido en días / Fabricación completa en 15–20 días laborables" checked /><span>Corte rápido / Fabricación 15–20 días lab.</span></label>
+        <label class="chip-label"><input type="radio" name="q_plazos_web" value="No poner días fijos (Plazo según proyecto al presupuestar)" /><span>No poner días fijos («Según proyecto»)</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">5.6. Su regla de pago (60% por adelantado y 40% al terminar): ¿quiere que aparezca escrita en las Preguntas Frecuentes de la web para filtrar regateadores?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_pago_web" value="SÍ, poner 60% / 40% en las FAQ de la web" checked /><span>SÍ, poner 60% / 40% en la web</span></label>
+        <label class="chip-label"><input type="radio" name="q_pago_web" value="NO, mejor decírselo solo por WhatsApp al dar precio" /><span>NO, solo por WhatsApp al dar precio</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">5.7. ¿Mencionamos en la web que para megaproyectos complejos (como el de 25m a 5m de altura) puede ofrecer apoyo de montaje, o ponemos 100% solo fabricación sin montaje?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_montaje_web" value="100% Nosotros fabricamos, tú montas (sin montaje)" checked /><span>100% «Nosotros fabricamos, tú montas»</span></label>
+        <label class="chip-label"><input type="radio" name="q_montaje_web" value="Añadir nota discreta de apoyo en montajes especiales de gran altura" /><span>Añadir apoyo en montajes gigantes especiales</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOQUE 6: PERMISOS DE GALERÍA -->
+  <div class="card">
+    <h2 class="card-title">6. Permisos de Fotos y Marcas</h2>
+    <p class="card-sub">Todas llevarán el pie: «Fabricado en nuestro taller para cliente profesional»</p>
+
+    <div class="q-block">
+      <label class="q-label">6.1. ¿Le confirmó la clienta de la Urna del traje de astronauta si podemos mostrar la foto en la web?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_permiso_urna" value="SÍ, podemos enseñarla" checked /><span>SÍ, podemos enseñarla</span></label>
+        <label class="chip-label"><input type="radio" name="q_permiso_urna" value="Sí, pero sin nombrar intermediario" /><span>Sí, sin nombrar intermediario</span></label>
+        <label class="chip-label"><input type="radio" name="q_permiso_urna" value="Todavía no ha preguntado / Esperar" /><span>Aún no ha preguntado / Esperar</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">6.2. En las fotos donde se ven logos de marcas finales (Agencia Espacial, Omoda y Jaecoo, Farmacias, Gasolinera), ¿las mostramos tal cual porque dan mucha autoridad?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_permiso_marcas" value="SÍ, mostrarlas tal cual indicando Fabricado en nuestro taller" checked /><span>SÍ, mostrarlas tal cual</span></label>
+        <label class="chip-label"><input type="radio" name="q_permiso_marcas" value="Tapar algún nombre concreto" /><span>Tapar algún nombre (anotar abajo)</span></label>
+      </div>
+      <input type="text" data-id="q_permiso_notas" placeholder="Anotar si hay alguna foto que prefiera no publicar..." />
+    </div>
+  </div>
+
+  <!-- ==================== SECCIÓN 5: CIERRE, MANTENIMIENTO Y EXPORTAR ==================== -->
+  <div id="sec5" class="sec-header">5. CIERRE Y EXPORTAR DATOS <span>FINAL</span></div>
+
+  <div class="card">
+    <h2 class="card-title">1. Cierre de Dominio, Factura y Mantenimiento</h2>
+    <p class="card-sub">Guion literal para decírselo al terminar la visita</p>
+
+    <div class="alert">
+      <strong>🗣️ Díselo así tal cual:</strong><br/>
+      1. <b>Dominio (~12 €/año):</b> «Antonio, para no marearte ahora pidiéndote tarjeta del banco por 12 euros, el dominio lo compro y lo adelanto yo hoy mismo a tu nombre para dejarte la web colgada esta semana, y ya lo ajustamos al final».<br/><br/>
+      2. <b>Entrega y Factura (797 €):</b> «Como quedamos, yo ahora me encierro a montarte la web entera y dejar lista la ficha de Google. Cuando te lo enseñe todo terminado y funcionando, ya te mando la factura sin prisa».<br/><br/>
+      3. <b>1.er Mes Gratis + Opción 30 €/mes:</b> «El <b>primer mes de mantenimiento (tanto de la web como de ir subiéndote publicaciones y fotos a la ficha de Google) te lo regalo yo incluido en los 797 €</b>. Cuando acabe ese primer mes, tú eliges: si quieres desentenderte de todo y que yo te mantenga la web y te siga subiendo trabajos a Google cada mes, son solo <b>30 €/mes</b>; y si no, te doy las llaves en mano de todo y solo pagas los ~12 € al año del dominio. Y recuerda que si en 3 meses pasas al plan grande de vídeos, te descuento los 797 € enteros».
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">¿Qué te dice sobre el mantenimiento tras el 1.er mes gratis?</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_mantenimiento" value="Le cuadra seguir con los 30 €/mes si va bien" checked /><span>Le cuadran los 30 €/mes</span></label>
+        <label class="chip-label"><input type="radio" name="q_mantenimiento" value="Prefiere llaves en mano tras el mes gratis" /><span>Prefiere llaves en mano</span></label>
+        <label class="chip-label"><input type="radio" name="q_mantenimiento" value="Lo vemos al terminar el primer mes gratis" /><span>Lo decide tras el mes gratis</span></label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <label class="q-label">Confirmación sobre factura (797 € + IVA):</label>
+      <div class="chip-group">
+        <label class="chip-label"><input type="radio" name="q_iva_factura" value="Confirmado con factura al entregar" checked /><span>Confirmado con factura al entregar</span></label>
+        <label class="chip-label"><input type="radio" name="q_iva_factura" value="Nota especial" /><span>Nota especial (apuntar abajo)</span></label>
+      </div>
+      <input type="text" data-id="q_cierre_notas" placeholder="Apunta cualquier comentario sobre el pago o entrega..." />
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">2. Dejar avisadas las 3–5 Reseñas de Clientes</h2>
+    <p class="card-sub">En 3–5 días Google aprobará el SMS que metimos hoy</p>
+
+    <label class="check-item">
+      <input type="checkbox" data-id="c_resenas_aviso" class="task-cb" />
+      <div class="check-content">
+        <div class="check-title">Avisarle de que en unos días le pasarás el enlace corto de reseñas</div>
+        <div class="check-desc">«Antonio, en cuanto Google apruebe la ficha esta semana te mando un enlace por WhatsApp para que se lo reenvíes a 4 o 5 clientes profesionales de confianza (como el de Dos Hermanas o amigos del gremio) y nos pongan 5 estrellas diciendo qué les fabricaste. Con esas 5 reseñas reales nos ponemos los primeros en Sevilla».</div>
+      </div>
+    </label>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">3. Notas Libres de la Reunión</h2>
+    <textarea data-id="notas_finales_libres" placeholder="Cualquier frase buena de Antonio, anécdota o dato suelto que quieras que metamos en la web..."></textarea>
+  </div>
+
+  <div class="card" style="background: #0f172a; color: #fff;">
+    <h2 class="card-title" style="color: #fff;">🚀 Exportar Todo (Funciona SIN INTERNET)</h2>
+    <p class="card-sub" style="color: #94a3b8;">Aunque no tengas cobertura en la nave, los botones 1 y 2 funcionan 100% offline en tu iPhone:</p>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+      <button type="button" class="btn btn-blue" onclick="exportFileIOS()">💾 1. GUARDAR ARCHIVO .TXT EN IPHONE (ARCHIVOS / NOTAS)</button>
+      <button type="button" class="btn btn-green" onclick="copyReport()">📋 2. COPIAR RESUMEN AL PORTAPAPELES</button>
+      <button type="button" class="btn btn-primary" onclick="shareWhatsApp()">📲 3. ENVIAR A MI WHATSAPP (Al recuperar cobertura)</button>
+    </div>
+    <div style="margin-top: 14px;">
+      <label style="font-size: 12px; color: #cbd5e1; font-weight: 700;">📄 Resumen generado en vivo:</label>
+      <textarea id="liveReportBox" readonly onclick="this.select()" style="margin-top:6px; height: 150px; font-size: 12px; font-family: monospace; background: #1e293b; color: #f8fafc; border-color: #475569;"></textarea>
+    </div>
+  </div>
+
+</main>
+
+<div class="bottom-bar">
+  <a href="#sec1" class="btn btn-outline">⬆ Arriba</a>
+  <button type="button" class="btn btn-green" onclick="copyReport()">📋 Copiar</button>
+  <button type="button" class="btn btn-blue" onclick="exportFileIOS()">💾 Guardar .TXT</button>
+</div>
+
+<script>
+  const STORAGE_KEY = 'nuvant_antonio_cid_visita_v4';
+  const DB_NAME = 'NuvantVisitaDB';
+  const STORE_NAME = 'state';
+
+  // Register Service Worker for 100% Offline mode on iPhone Safari
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').then(() => {
+        const ind = document.getElementById('saveIndicator');
+        if (ind) ind.textContent = '📶 Lista para usar SIN INTERNET';
+      }).catch(() => {});
+    });
+  }
+
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      if (!window.indexedDB) return reject('No IDB');
+      const req = indexedDB.open(DB_NAME, 1);
+      req.onupgradeneeded = e => {
+        e.target.result.createObjectStore(STORE_NAME);
+      };
+      req.onsuccess = e => resolve(e.target.result);
+      req.onerror = e => reject(e);
+    });
+  }
+
+  async function saveToIDB(data) {
+    try {
+      const db = await openDB();
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      tx.objectStore(STORE_NAME).put(data, STORAGE_KEY);
+    } catch (e) {}
+  }
+
+  async function loadFromIDB() {
+    try {
+      const db = await openDB();
+      return await new Promise((resolve) => {
+        const tx = db.transaction(STORE_NAME, 'readonly');
+        const req = tx.objectStore(STORE_NAME).get(STORAGE_KEY);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => resolve(null);
+      });
+    } catch (e) { return null; }
+  }
+
+  function updateProgress() {
+    const checkboxes = document.querySelectorAll('.task-cb');
+    let total = checkboxes.length;
+    let checked = 0;
+    checkboxes.forEach(cb => {
+      if (cb.checked) checked++;
+    });
+    document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+      cb.closest('.check-item').classList.toggle('checked', cb.checked);
+    });
+    const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+    document.getElementById('progressText').textContent = `${checked} / ${total} fotos y pasos (${pct}%)`;
+    document.getElementById('progressBar').style.width = `${pct}%`;
+    const liveBox = document.getElementById('liveReportBox');
+    if (liveBox) liveBox.value = buildReportText();
+  }
+
+  function collectState() {
+    const data = { checks: {}, inputs: {}, radios: {}, multiChecks: {} };
+    document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb => {
+      data.checks[cb.dataset.id] = cb.checked;
+    });
+    document.querySelectorAll('input[type="text"][data-id], input[type="tel"][data-id], textarea[data-id]').forEach(inp => {
+      data.inputs[inp.dataset.id] = inp.value;
+    });
+    document.querySelectorAll('input[type="radio"]:checked').forEach(r => {
+      data.radios[r.name] = r.value;
+    });
+    const multiNames = new Set();
+    document.querySelectorAll('.chip-label input[type="checkbox"]').forEach(c => multiNames.add(c.name));
+    multiNames.forEach(name => {
+      data.multiChecks[name] = Array.from(document.querySelectorAll(`.chip-label input[type="checkbox"][name="${name}"]:checked`)).map(c => c.value);
+    });
+    return data;
+  }
+
+  function applyState(data) {
+    if (!data) return;
+    if (data.checks) {
+      Object.entries(data.checks).forEach(([id, val]) => {
+        const el = document.querySelector(`input[type="checkbox"][data-id="${id}"]`);
+        if (el) el.checked = val;
+      });
+    }
+    if (data.inputs) {
+      Object.entries(data.inputs).forEach(([id, val]) => {
+        const el = document.querySelector(`[data-id="${id}"]`);
+        if (el) el.value = val;
+      });
+    }
+    if (data.radios) {
+      Object.entries(data.radios).forEach(([name, val]) => {
+        const radios = document.querySelectorAll(`input[type="radio"][name="${name}"]`);
+        radios.forEach(r => { if (r.value === val) r.checked = true; });
+      });
+    }
+    if (data.multiChecks) {
+      Object.entries(data.multiChecks).forEach(([name, arr]) => {
+        if (Array.isArray(arr)) {
+          document.querySelectorAll(`.chip-label input[type="checkbox"][name="${name}"]`).forEach(c => {
+            c.checked = arr.includes(c.value);
+          });
+        }
+      });
+    }
+  }
+
+  function saveState() {
+    const data = collectState();
+    const json = JSON.stringify(data);
+    try { localStorage.setItem(STORAGE_KEY, json); } catch (e) {}
+    try { sessionStorage.setItem(STORAGE_KEY, json); } catch (e) {}
+    try { window.name = json; } catch (e) {}
+    saveToIDB(data);
+    const ind = document.getElementById('saveIndicator');
+    if (ind) ind.textContent = '✓ Guardado ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    updateProgress();
+  }
+
+  async function loadState() {
+    let data = null;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY) || sessionStorage.getItem(STORAGE_KEY);
+      if (raw) data = JSON.parse(raw);
+    } catch (e) {}
+    if (!data) {
+      data = await loadFromIDB();
+    }
+    if (!data && window.name && window.name.startsWith('{')) {
+      try { data = JSON.parse(window.name); } catch (e) {}
+    }
+    if (data) applyState(data);
+    updateProgress();
+  }
+
+  function buildReportText() {
+    const lines = [];
+    lines.push('=== RESUMEN VISITA NAVE ANTONIO CID (NUVANT) ===');
+    lines.push('Fecha: ' + new Date().toLocaleString('es-ES'));
+    lines.push('');
+
+    const getRadio = name => {
+      const el = document.querySelector(`input[type="radio"][name="${name}"]:checked`);
+      return el ? el.value : '-';
+    };
+    const getMulti = name => {
+      const els = document.querySelectorAll(`.chip-label input[type="checkbox"][name="${name}"]:checked`);
+      return Array.from(els).map(c => c.value).join(' | ');
+    };
+    const getVal = id => {
+      const el = document.querySelector(`[data-id="${id}"]`);
+      return el && el.value.trim() ? el.value.trim() : '-';
+    };
+    const getChk = id => {
+      const el = document.querySelector(`input[type="checkbox"][data-id="${id}"]`);
+      return el && el.checked ? 'SÍ' : 'NO';
+    };
+
+    lines.push('--- 1. DATOS FISCALES, CONTACTO Y DOMINIO ---');
+    lines.push(`• Foto a factura/albarán hecha: ${getChk('q_foto_factura')}`);
+    lines.push(`• Razón Social / NIF: ${getVal('q_fiscal')}`);
+    lines.push(`• Dirección exacta nave: ${getVal('q_direccion')}`);
+    lines.push(`• Nombre comercial elegido: ${getRadio('q_nombre_comercial')} (Otro: ${getVal('q_nombre_comercial_otro')})`);
+    lines.push(`• Logotipo: ${getRadio('q_logo')}`);
+    lines.push(`• Dominio elegido: ${getRadio('q_dominio')} (Otro: ${getVal('q_dominio_otro')})`);
+    lines.push(`• WhatsApp / Teléfono: ${getRadio('q_tel_tipo')} -> ${getVal('q_telefono')}`);
+    lines.push(`• Horario público: ${getRadio('q_horario')} (${getVal('q_horario_nota')})`);
+    lines.push(`• Dirección visible en Maps: ${getRadio('q_mostrar_dir')}`);
+    lines.push('');
+
+    lines.push('--- 2. SERVICIOS CONFIRMADOS PARA LA WEB ---');
+    document.querySelectorAll('#serviciosBlock input[type="checkbox"][data-id]').forEach(cb => {
+      const title = cb.closest('.check-item').querySelector('.check-title').textContent.trim();
+      lines.push(`[${cb.checked ? 'X' : ' '}] ${title}`);
+    });
+    lines.push(`• Otros Rotulistas: ${getVal('s_otros_rotulistas')}`);
+    lines.push(`• Otros Reformas: ${getVal('s_otros_reformas')}`);
+    lines.push(`• Otros Metal/Chapistas: ${getVal('s_otros_metal')}`);
+    lines.push(`• Otros Carpinteros/Eventos: ${getVal('s_otros_eventos')}`);
+    lines.push('');
+
+    lines.push('--- 3. MAQUINARIA Y CAPACIDADES ---');
+    lines.push(`• Fresadora 4x2m grosor máx: ${getRadio('q_fresa_grosor')} | Nota: ${getVal('q_fresa_nota')}`);
+    lines.push(`• Plasma 3x1,5m grosor mín: ${getRadio('q_plasma_min')} | Nota: ${getVal('q_plasma_nota')}`);
+    lines.push(`• Soldadora láser metales: ${getRadio('q_laser_metales')}`);
+    lines.push(`• Horno y fondo de letras: ${getVal('q_horno_medida')}`);
+    lines.push(`• Otras máquinas adicionales: ${getVal('q_otra_maquina_detalle')}`);
+    lines.push('');
+
+    lines.push('--- 4. BANDEROLAS Y CATÁLOGO ESTÁNDAR ---');
+    lines.push(`• Entrega banderolas 60/70/80: ${getMulti('q_banderolas_entrega')}`);
+    lines.push(`• Precios en web: ${getRadio('q_banderolas_precio')}`);
+    lines.push(`• Otros productos estándar: ${getVal('q_otros_moldes')}`);
+    lines.push('');
+
+    lines.push('--- 5. OPERATIVA, ARCHIVOS, ENVÍOS Y PERMISOS ---');
+    lines.push(`• Prioridad en portada web: ${getMulti('q_prioridad_web')}`);
+    lines.push(`• Trabajos/clientes a filtrar: ${getVal('q_trabajos_evitar')}`);
+    lines.push(`• Material del cliente: ${getRadio('q_material_cliente')}`);
+    lines.push(`• Archivos aceptados: ${getMulti('q_archivos')}`);
+    lines.push(`• Kit montaje entregado: ${getMulti('q_kit_montaje')}`);
+    lines.push(`• Plazos en web: ${getRadio('q_plazos_web')}`);
+    lines.push(`• Pago 60/40 en FAQ: ${getRadio('q_pago_web')}`);
+    lines.push(`• Mencionar montaje: ${getRadio('q_montaje_web')}`);
+    lines.push(`• Permiso Urna Astronauta: ${getRadio('q_permiso_urna')}`);
+    lines.push(`• Permiso Marcas en fotos: ${getRadio('q_permiso_marcas')} (${getVal('q_permiso_notas')})`);
+    lines.push('');
+
+    lines.push('--- 6. FOTOS HECHAS EN NAVE Y PASADAS DE SU MÓVIL ---');
+    document.querySelectorAll('.task-cb').forEach(cb => {
+      const title = cb.closest('.check-item').querySelector('.check-title').textContent.trim();
+      lines.push(`[${cb.checked ? 'HECHO' : 'PENDIENTE'}] ${title}`);
+    });
+    lines.push(`• Notas fotos nave: ${getVal('notas_fotos_nave')}`);
+    lines.push(`• Notas fotos móvil Antonio: ${getVal('notas_fotos_movil')}`);
+    lines.push('');
+
+    lines.push('--- 7. CIERRE Y MANTENIMIENTO ---');
+    lines.push(`• Mantenimiento tras 1.er mes gratis: ${getRadio('q_mantenimiento')}`);
+    lines.push(`• Factura 797€: ${getRadio('q_iva_factura')} (${getVal('q_cierre_notas')})`);
+    lines.push(`• Notas finales libres: ${getVal('notas_finales_libres')}`);
+
+    return lines.join('\n');
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 2800);
+  }
+
+  function copyReport() {
+    const text = buildReportText();
+    const box = document.getElementById('liveReportBox');
+    if (box) box.value = text;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('✅ ¡Copiado! Pégalo en Notas o WhatsApp');
+      }).catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    const box = document.getElementById('liveReportBox');
+    if (box) {
+      box.value = text;
+      box.focus();
+      box.select();
+      box.setSelectionRange(0, 999999);
+      try { document.execCommand('copy'); } catch (e) {}
+    }
+    showToast('✅ ¡Texto seleccionado y copiado!');
+  }
+
+  async function exportFileIOS() {
+    const text = buildReportText();
+    // 1. Try native iOS File Share (Guardar en Archivos / Notas offline)
+    if (navigator.canShare && window.File) {
+      try {
+        const file = new File([text], 'Resumen_Visita_Antonio_Cid.txt', { type: 'text/plain;charset=utf-8' });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            files: [file],
+            title: 'Resumen Visita Antonio Cid'
+          });
+          showToast('✅ ¡Archivo .TXT exportado!');
+          return;
+        }
+      } catch (e) {
+        if (e.name === 'AbortError') return;
+      }
+    }
+    // 2. Fallback to text share sheet on iPhone
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Resumen Visita Antonio Cid',
+          text: text
+        });
+        return;
+      } catch (e) {
+        if (e.name === 'AbortError') return;
+      }
+    }
+    // 3. Desktop / standard download fallback
+    try {
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'Resumen_Visita_Antonio_Cid.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('✅ ¡Archivo .TXT descargado!');
+    } catch (e) {
+      copyReport();
+    }
+  }
+
+  function shareWhatsApp() {
+    const text = buildReportText();
+    const url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
+    window.location.href = url;
+  }
+
+  document.addEventListener('change', saveState);
+  document.addEventListener('input', saveState);
+  window.addEventListener('DOMContentLoaded', loadState);
+</script>
+</body>
+</html>
